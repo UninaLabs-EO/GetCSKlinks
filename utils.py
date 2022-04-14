@@ -32,6 +32,28 @@ def getLinks(page):
      return Links
 
 
+def saveLinks(prod_number, parentLinks):
+     cwd = os.getcwd()
+     outdir=cwd+f'/{prod_number}'
+     os.makedirs(outdir, exist_ok=True)
+
+
+     allLinks = []
+     for page in parentLinks:
+          Links = getLinks(page)
+          allLinks += Links
+
+
+     if outdir.endswith('/'):
+          pass
+     else:
+          outdir+='/'
+
+
+     with open(outdir+'Links.txt', 'w') as f:
+          for link in allLinks:
+               f.write(link)
+               f.write('\n')
 
 def main():
      print("Starting main")
